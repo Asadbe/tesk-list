@@ -35,15 +35,15 @@ func NewContactList() ContactList {
 }
 
 //Add is function for adding contact to the list
-func (cl *ContactList) Add(ct *Contact) (*Contact, error) {
+func (cl *ContactList) Add(ct *Contact) (*Contact) {
 	cl.contacts = append(cl.contacts, *ct)
-	return ct, nil
+	return ct
 }
 
 //Delete ...
-func (cl *ContactList) Delete(id int) error {
+func (cl *ContactList) Delete(id int) {
 	cl.contacts = append(cl.contacts[:id], cl.contacts[id+1:]...)
-	return nil
+	return
 
 }
 
@@ -122,9 +122,8 @@ func (cl *ContactList) Date(date time.Time) ([]Contact, error) {
 func main() {
 
 	cl := NewContactList()
-
+	cl.Add(&Contact{ID: 0, Name: "sign up", Assighec: "Oybek", Deadline: time.Now().UTC().AddDate(0, 0, -10), Done: true})
 	cl.Add(&Contact{ID: 1, Name: "write code", Assighec: "rustam", Deadline: time.Now().UTC().AddDate(0, 0, 10), Done: true})
-	cl.Add(&Contact{ID: 100, Name: "sign up", Assighec: "Oybek", Deadline: time.Now().UTC().AddDate(0, 0, -10), Done: true})
 	cl.Add(&Contact{ID: 2, Name: "sign up", Assighec: "Oybek", Deadline: time.Now().UTC().AddDate(0, 0, -11), Done: true})
 	cl.Add(&Contact{ID: 3, Name: "sign up", Assighec: "Oybek", Deadline: time.Now().UTC().AddDate(0, 0, -3), Done: true})
 	cl.Add(&Contact{ID: 4, Name: "sign up", Assighec: "Oybek", Deadline: time.Now().UTC().AddDate(0, 0, 10), Done: false})
@@ -134,7 +133,7 @@ func main() {
 	cl.Add(&Contact{ID: 8, Name: "sign up", Assighec: "Ulug`bek", Deadline: time.Now().UTC().AddDate(0, 0, 4), Done: true})
 	cl.Add(&Contact{ID: 9, Name: "sign up", Assighec: "Oybek", Deadline: time.Now().UTC().AddDate(0, 0, -8), Done: true})
 
-	cl.Delete(1) //  delete function number is id
+	cl.Delete(0) //  delete function number is id
 
 	err := cl.Update(100, &Contact{ID: 100, Name: "Rustam", Assighec: "Temr", Deadline: time.Now().UTC(), Done: false})
 
